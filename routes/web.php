@@ -7,10 +7,6 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified', 'role:employee'])->name('dashboard');
@@ -36,10 +32,18 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->name('admin.')->grou
 
     })->name('dashboard');
     Route::get('/employees', [AdminController::class, 'employees'])->name('employees.index');
+    Route::get('/employees/new', [AdminController::class, 'create'])->name('employees.create');
+    Route::post('/employee', [AdminController::class, 'store'])->name('employees.store');
+    Route::get('/employee/{id}', [AdminController::class, 'show'])->name('employees.show');
+    Route::put('/employee/{id}', [AdminController::class, 'update'])
+        ->name('employees.update');
+    Route::delete('/admin/employee/{id}', [AdminController::class, 'destroy'])
+        ->name('employees.destroy');
+
+
     Route::get('/leave-requests', [AdminController::class, 'leaveRequests'])->name('employees.leaveRequests');
     Route::post('/leave-requests/{id}', [AdminController::class, 'updateStatus'])->name('employees.updateStatus');
     Route::get('/leave-requests/history', [AdminController::class, 'leaveRequestsHistory'])->name('employees.history');
-
 });
 // Manager routes
 Route::prefix('manager')->middleware(['auth', 'role:manager'])->name('manager.')->group(function () {
@@ -54,5 +58,9 @@ Route::prefix('manager')->middleware(['auth', 'role:manager'])->name('manager.')
     Route::get('/leave-requests/history', [ManagerController::class, 'leaveRequestsHistory'])->name('employees.history');
 });
 
+
+Route::fallback(function () {
+    return redirect()->route('login');
+});
 
 require __DIR__.'/auth.php';

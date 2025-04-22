@@ -1,8 +1,17 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight text-center">
-            {{ __('All Employees') }}
-        </h2>
+        <div class="d-flex justify-between items-center w-full text-center">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ __('All Employees') }}
+            </h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight text-left">
+                <a href="{{ route('admin.employees.create') }}" class="text-blue-500 hover:text-blue-700">
+                    {{ __('Add Employee') }}
+                </a>
+            </h2>
+        </div>
+        
+        
     </x-slot>
 
     <div class="py-12">
@@ -21,7 +30,11 @@
                     <tbody>
                         @forelse ($employees as $employee)
                             <tr class="border-t hover:bg-gray-50 text-center">
-                                <td class="p-4 ">{{ $employee->id }}</td>
+                                <td class="p-4">
+                                    <a href="{{ route('admin.employees.show', $employee->id) }}" class="text-blue-600 hover:underline">
+                                        {{ $employee->id }}
+                                    </a>
+                                </td>
                                 <td class="p-4">{{ $employee->name }}</td>
                                 <td class="p-4 capitalize">{{ $employee->role }}</td>
                                 <td class="p-4 capitalize">{{ $employee->department->name }}</td>
