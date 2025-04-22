@@ -36,6 +36,15 @@
                 <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin/dashboard')">
                     {{ __('Dashboard') }}
                 </x-nav-link>
+                <x-nav-link :href="route('admin.employees.index')" :active="request()->routeIs('admin.employees.index')">
+                    {{ __('Employees') }}
+                </x-nav-link>
+                <x-nav-link :href="route('admin.employees.leaveRequests')" :active="request()->routeIs('admin.employees.leaveRequests')">
+                    {{ __('Leave Requests') }}
+                </x-nav-link>
+                <x-nav-link :href="route('admin.employees.history')" :active="request()->routeIs('admin.employees.history')">
+                    {{ __('Leave Requests History') }}
+                </x-nav-link>
                 @elseif(Auth::user()->hasRole('manager'))
                 <x-nav-link :href="route('manager.dashboard')" :active="request()->routeIs('manager/dashboard')">
                     {{ __('Dashboard') }}
@@ -95,10 +104,27 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('employee.leave-request.create')" :active="request()->routeIs('/leave-request/create')">
+                {{ __('Leave Request') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('employee.leave-request.history')" :active="request()->routeIs('/leave-request/history')">
+                {{ __('Requests History') }}
+            </x-responsive-nav-link>
+
             @elseif(Auth::user()->hasRole('admin'))
             <x-responsive-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin/dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.employees.index')" :active="request()->routeIs('admin.employees.index')">
+                {{ __('Employees') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.employees.leaveRequests')" :active="request()->routeIs('admin.employees.leaveRequests')">
+                {{ __('Leave Requests') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.employees.history')" :active="request()->routeIs('admin.employees.history')">
+                {{ __('Leave Requests History') }}
+            </x-responsive-nav-link>
+
             @elseif(Auth::user()->hasRole('manager'))
             <x-responsive-nav-link :href="route('manager.dashboard')" :active="request()->routeIs('manager/dashboard')">
                 {{ __('Dashboard') }}

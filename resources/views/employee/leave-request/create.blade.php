@@ -19,28 +19,40 @@
                             <option value="emergency">Emergency</option>
                             <option value="other">Other</option>
                         </select>
+                        @error('type')
+                            <span class="text-red-600 text-sm">{{ $message }}</span>
+                        @enderror
                     </div>
 
                     <div class="mb-4">
                         <label for="from_date" class="block text-gray-700 font-medium mb-2">Start Date</label>
-                        <input type="date" name="from_date" id="from_date" class="w-full border-gray-300 rounded shadow-sm" required>
+                        <input type="date" name="from_date" id="from_date" class="w-full border-gray-300 rounded shadow-sm" required value="{{ old('from_date') }}">
+                        @error('from_date')
+                            <span class="text-red-600 text-sm">{{ $message }}</span>
+                        @enderror
                     </div>
 
                     <div class="mb-4">
                         <label for="to_date" class="block text-gray-700 font-medium mb-2">End Date</label>
-                        <input type="date" name="to_date" id="to_date" class="w-full border-gray-300 rounded shadow-sm" required>
+                        <input type="date" name="to_date" id="to_date" class="w-full border-gray-300 rounded shadow-sm" required value="{{ old('to_date') }}">
+                        @error('to_date')
+                            <span class="text-red-600 text-sm">{{ $message }}</span>
+                        @enderror
                     </div>
 
                     <div class="mb-4">
                         <label for="reason" class="block text-gray-700 font-medium mb-2">Reason (optional)</label>
-                        <textarea name="reason" id="reason" rows="4" class="w-full border-gray-300 rounded shadow-sm"></textarea>
+                        <textarea name="reason" id="reason" rows="4" class="w-full border-gray-300 rounded shadow-sm">{{ old('reason') }}</textarea>
+                        @error('reason')
+                            <span class="text-red-600 text-sm">{{ $message }}</span>
+                        @enderror
                     </div>
 
                     <div class="mt-6">
                         <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-black px-4 py-2 rounded">
                             Submit Leave Request
                         </button>
-                        <a href="{{ route('dashboard') }}" class="ml-4 text-gray-600 hover:text-gray-900">Cancel</a>
+                        <a href="{{ route('employee.leave-request.history') }}" class="ml-4 text-gray-600 hover:text-gray-900">Cancel</a>
                     </div>
                 </form>
             </div>

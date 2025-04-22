@@ -20,6 +20,9 @@ class EmployeeController extends Controller
             'from_date' => 'required|date|after_or_equal:today',
             'to_date' => 'required|date|after_or_equal:from_date',
             'reason' => 'nullable|string|max:1000',
+        ],[
+            'from_date.after_or_equal' => 'The start date must be today or a future date.',
+            'to_date.after_or_equal' => 'The end date must be on or after the start date.',
         ]);
 
         $request->user()->leaveRequests()->create([

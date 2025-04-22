@@ -19,8 +19,8 @@ class UserSeeder extends Seeder
         $managerRole = Role::where('name', UserRole::Manager)->first();
 
         // Create departments
-        $hrDepartment = Department::where('name', 'HR');
-        $engDepartment = Department::where( 'name', 'Engineering');
+        $hrDepartment = Department::where('name', 'HR')->first();
+        $engDepartment = Department::where('name', 'Engineering')->first();
 
         // Create Admin user
         $admin = User::create([

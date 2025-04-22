@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
@@ -33,6 +34,11 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->name('admin.')->grou
         return view('dashboard', ['user' => $user]);
 
     })->name('dashboard');
+    Route::get('/employees', [AdminController::class, 'employees'])->name('employees.index');
+    Route::get('/leave-requests', [AdminController::class, 'leaveRequests'])->name('employees.leaveRequests');
+    Route::post('/leave-requests/{id}', [AdminController::class, 'updateStatus'])->name('employees.updateStatus');
+    Route::get('/leave-requests/history', [AdminController::class, 'leaveRequestsHistory'])->name('employees.history');
+
 });
 // Manager routes
 Route::prefix('manager')->middleware(['auth', 'role:manager'])->name('manager.')->group(function () {
