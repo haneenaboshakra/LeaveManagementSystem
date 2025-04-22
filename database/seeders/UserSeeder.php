@@ -2,9 +2,12 @@
 
 namespace Database\Seeders;
 
+use App\Enums\LeaveRequestStatus;
 use App\Enums\UserRole;
+use App\Models\LeaveRequest;
 use App\Models\User;
 use App\Models\Department;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
@@ -81,5 +84,74 @@ class UserSeeder extends Seeder
             'manager_id' => $engManager->id,
         ]);
         $engEmployee1->assignRole($employeeRole);  // Assign role to Employee
+    
+        // Create Leave Requests for HR Employees
+        LeaveRequest::create([
+            'user_id' => $hrEmployee1->id,
+            'reviewed_by' => $hrManager->id,
+            'type' => 'vacation',
+            'status' => LeaveRequestStatus::Approved, // Approved status
+            'from_date' => Carbon::today()->addDays(2), // 2 days from today
+            'to_date' => Carbon::today()->addDays(5), // 5 days from today
+            'reason' => 'Vacation leave',
+        ]);
+
+        LeaveRequest::create([
+            'user_id' => $hrEmployee2->id,
+            'reviewed_by' => $hrManager->id,
+            'type' => 'sick',
+            'status' => LeaveRequestStatus::Rejected, // Rejected status
+            'from_date' => Carbon::today()->addDays(1), // 1 day from today
+            'to_date' => Carbon::today()->addDays(3), // 3 days from today
+            'reason' => 'Medical leave',
+        ]);
+        LeaveRequest::create([
+            'user_id' => $hrEmployee2->id,
+            'reviewed_by' => null,
+            'type' => 'sick',
+            'status' => LeaveRequestStatus::Pending, // Rejected status
+            'from_date' => Carbon::today()->addDays(1), // 1 day from today
+            'to_date' => Carbon::today()->addDays(3), // 3 days from today
+            'reason' => 'Medical leave',
+        ]);
+
+        // Create Leave Requests for Engineering Employee
+        LeaveRequest::create([
+            'user_id' => $engEmployee1->id,
+            'reviewed_by' => null,
+            'type' => 'emergency',
+            'status' => LeaveRequestStatus::Pending, // Pending status
+            'from_date' => Carbon::today()->addDays(1), // 1 day from today
+            'to_date' => Carbon::today()->addDays(2), // 2 days from today
+            'reason' => 'Emergency leave',
+        ]);
+        // Create Leave Requests for Engineering Employee
+        LeaveRequest::create([
+            'user_id' => $engEmployee1->id,
+            'reviewed_by' => null,
+            'type' => 'emergency',
+            'status' => LeaveRequestStatus::Pending, // Pending status
+            'from_date' => Carbon::today()->addDays(1), // 1 day from today
+            'to_date' => Carbon::today()->addDays(2), // 2 days from today
+            'reason' => 'Emergency leave',
+        ]);
+        LeaveRequest::create([
+            'user_id' => $engEmployee1->id,
+            'reviewed_by' => $engManager->id,
+            'type' => 'emergency',
+            'status' => LeaveRequestStatus::Approved, // Pending status
+            'from_date' => Carbon::today()->addDays(1), // 1 day from today
+            'to_date' => Carbon::today()->addDays(2), // 2 days from today
+            'reason' => 'Emergency leave',
+        ]);
+        LeaveRequest::create([
+            'user_id' => $engEmployee1->id,
+            'reviewed_by' => $engManager->id,
+            'type' => 'emergency',
+            'status' => LeaveRequestStatus::Rejected, // Pending status
+            'from_date' => Carbon::today()->addDays(1), // 1 day from today
+            'to_date' => Carbon::today()->addDays(2), // 2 days from today
+            'reason' => 'Emergency leave',
+        ]);
     }
 }

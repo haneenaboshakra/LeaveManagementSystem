@@ -49,6 +49,15 @@
                 <x-nav-link :href="route('manager.dashboard')" :active="request()->routeIs('manager/dashboard')">
                     {{ __('Dashboard') }}
                 </x-nav-link>
+                <x-nav-link :href="route('manager.employees.index')" :active="request()->routeIs('manager/employees')">
+                    {{ __('Employees') }}
+                </x-nav-link>
+                <x-nav-link :href="route('manager.employees.leaveRequests')" :active="request()->routeIs('manager.employees.leaveRequests')">
+                    {{ __('Leave Requests') }}
+                </x-nav-link>
+                <x-nav-link :href="route('manager.employees.history')" :active="request()->routeIs('manager.employees.history')">
+                    {{ __('Leave Requests History') }}
+                </x-nav-link>
                 @endif
             </div>
             <!-- Settings Dropdown -->
@@ -128,6 +137,15 @@
             @elseif(Auth::user()->hasRole('manager'))
             <x-responsive-nav-link :href="route('manager.dashboard')" :active="request()->routeIs('manager/dashboard')">
                 {{ __('Dashboard') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('manager.employees.index')" :active="request()->routeIs('manager.employees.index')">
+                {{ __('Employees') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('manager.employees.leaveRequests')" :active="request()->routeIs('manager.employees.leaveRequests')">
+                {{ __('Leave Requests') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('manager.employees.history')" :active="request()->routeIs('manager.employees.history')">
+                {{ __('Leave Requests History') }}
             </x-responsive-nav-link>
             @endif
         </div>

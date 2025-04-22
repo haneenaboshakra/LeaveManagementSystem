@@ -21,33 +21,5 @@ class DatabaseSeeder extends Seeder
             DepartmentSeeder::class,
             UserSeeder::class,
         ]);
-        // $employee = User::factory()->create([
-        //     'name' => 'Hanine',
-        //     'email' => 'hanine@hanine.com',
-        //     'password' => bcrypt('password'),
-        // ]);
-        // // Assign user role to the created user
-        // $employeeRole = Role::where('name', UserRole::Employee)->first();
-        // $employee->assignRole($employeeRole);
-
-
-        // $admin = User::factory()->create([
-        //     'name' => 'Admin',
-        //     'email' => 'admin@admin.com',
-        //     'password' => bcrypt('password'),
-        // ]);
-        // // Assign admin role to the created admin user
-        // $adminRole = Role::where('name', UserRole::Admin)->first();
-        // $admin->assignRole($adminRole);
-
-
-        // $manager = User::factory()->create([
-        //     'name' => 'manager',
-        //     'email' => 'manager@manager.com',
-        //     'password' => bcrypt('password'),
-        // ]);
-        // // Assign manager role to the created manager user
-        // $managerRole = Role::where('name', UserRole::Manager)->first();
-        // $manager->assignRole($managerRole);
     }
 }

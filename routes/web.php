@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -47,6 +48,10 @@ Route::prefix('manager')->middleware(['auth', 'role:manager'])->name('manager.')
         return view('dashboard', ['user' => $user]);
 
     })->name('dashboard');
+    Route::get('/employees', [ManagerController::class, 'employees'])->name('employees.index');
+    Route::get('/leave-requests', [ManagerController::class, 'leaveRequests'])->name('employees.leaveRequests');
+    Route::post('/leave-requests/{id}', [ManagerController::class, 'updateStatus'])->name('employees.updateStatus');
+    Route::get('/leave-requests/history', [ManagerController::class, 'leaveRequestsHistory'])->name('employees.history');
 });
 
 
