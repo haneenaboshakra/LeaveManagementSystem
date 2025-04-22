@@ -14,7 +14,10 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->enum('role', ['admin', 'manager', 'employee'])->default('employee');
             $table->string('email')->unique();
+            $table->foreignId('manager_id')->nullable()->constrained('users')->nullOnDelete(); // Self-reference
+            $table->foreignId('department_id')->nullable()->constrained()->nullOnDelete();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

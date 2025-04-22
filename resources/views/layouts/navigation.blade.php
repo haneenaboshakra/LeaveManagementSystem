@@ -26,6 +26,9 @@
                 <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                     {{ __('Dashboard') }}
                 </x-nav-link>
+                <x-nav-link :href="route('employee.leave-request.create')" :active="request()->routeIs('/leave-request/create')">
+                    {{ __('Leave Request') }}
+                </x-nav-link>
                 @elseif(Auth::user()->hasRole('admin'))
                 <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin/dashboard')">
                     {{ __('Dashboard') }}

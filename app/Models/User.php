@@ -52,4 +52,24 @@ class User extends Authenticatable
     public function isManager() {
         return $this->hasRole('manager');
     }
+    // An employee may have a manager (self-referencing)
+    public function manager()
+    {
+        return $this->belongsTo(User::class, 'manager_id');
+    }
+    // A user can have many leave requests
+    public function leaveRequests()
+    {
+        return $this->hasMany(LeaveRequest::class);
+    }
+    // manager/admin can review many leave requests
+    public function reviewedLeaveRequests()
+    {
+        return $this->hasMany(LeaveRequest::class, 'reviewed_by');
+    }
+     // A user belongs to a department
+    public function department()
+    {
+        return $this->belongsTo(Department::class, 'department_id');
+    }
 }
