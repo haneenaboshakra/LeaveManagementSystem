@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EmployeeController extends Controller
 {
@@ -31,4 +32,13 @@ class EmployeeController extends Controller
 
         return redirect()->route('dashboard')->with('success', 'Leave request submitted successfully.');
     }
+    public function history()
+    {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        // Select all old leave requests for the authenticated user
+        $leaveRequests = $user->leaveRequests()->latest()->get();
+        return view('employee.leave-request.history', compact('leaveRequests'));
+    }
+
 }

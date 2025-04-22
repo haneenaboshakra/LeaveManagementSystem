@@ -22,6 +22,7 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'role:employee'])->name('employee.')->group(function () {
     Route::get('/leave-request/create', [EmployeeController::class, 'create'])->name('leave-request.create');
     Route::post('/leave-request', [EmployeeController::class, 'store'])->name('leave-request.store');
+    Route::get('/leave-request/history', [EmployeeController::class, 'history'])->name('leave-request.history');
 });
 
 
