@@ -34,12 +34,15 @@ class AuthenticatedSessionController extends Controller
         // Admin redirection
         if ($user->hasRole('admin')) {
             Log::info('Admin logged in');
+
             return redirect()->route('admin.dashboard');
         }
         if ($user->hasRole('manager')) {
             Log::info('Manager logged in');
+
             return redirect()->route('manager.dashboard');
         }
+
         return redirect()->intended(route('dashboard', absolute: false));
     }
 

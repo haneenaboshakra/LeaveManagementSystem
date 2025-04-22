@@ -23,11 +23,11 @@ Route::middleware(['auth', 'role:employee'])->name('employee.')->group(function 
     Route::get('/leave-request/history', [EmployeeController::class, 'history'])->name('leave-request.history');
 });
 
-
 // Admin routes
 Route::prefix('admin')->middleware(['auth', 'role:admin'])->name('admin.')->group(function () {
-    Route::get('/dashboard', function () { 
+    Route::get('/dashboard', function () {
         $user = Auth::user();  // Get the authenticated user
+
         return view('dashboard', ['user' => $user]);
 
     })->name('dashboard');
@@ -40,15 +40,15 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->name('admin.')->grou
     Route::delete('/admin/employee/{id}', [AdminController::class, 'destroy'])
         ->name('employees.destroy');
 
-
     Route::get('/leave-requests', [AdminController::class, 'leaveRequests'])->name('employees.leaveRequests');
     Route::post('/leave-requests/{id}', [AdminController::class, 'updateStatus'])->name('employees.updateStatus');
     Route::get('/leave-requests/history', [AdminController::class, 'leaveRequestsHistory'])->name('employees.history');
 });
 // Manager routes
 Route::prefix('manager')->middleware(['auth', 'role:manager'])->name('manager.')->group(function () {
-    Route::get('/dashboard', function () { 
+    Route::get('/dashboard', function () {
         $user = Auth::user();  // Get the authenticated user
+
         return view('dashboard', ['user' => $user]);
 
     })->name('dashboard');
@@ -57,7 +57,6 @@ Route::prefix('manager')->middleware(['auth', 'role:manager'])->name('manager.')
     Route::post('/leave-requests/{id}', [ManagerController::class, 'updateStatus'])->name('employees.updateStatus');
     Route::get('/leave-requests/history', [ManagerController::class, 'leaveRequestsHistory'])->name('employees.history');
 });
-
 
 Route::fallback(function () {
     return redirect()->route('login');

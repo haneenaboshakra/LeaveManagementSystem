@@ -4,9 +4,9 @@ namespace Database\Seeders;
 
 use App\Enums\LeaveRequestStatus;
 use App\Enums\UserRole;
+use App\Models\Department;
 use App\Models\LeaveRequest;
 use App\Models\User;
-use App\Models\Department;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -84,7 +84,7 @@ class UserSeeder extends Seeder
             'manager_id' => $engManager->id,
         ]);
         $engEmployee1->assignRole($employeeRole);  // Assign role to Employee
-    
+
         // Create Leave Requests for HR Employees
         LeaveRequest::create([
             'user_id' => $hrEmployee1->id,

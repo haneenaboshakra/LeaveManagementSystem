@@ -20,7 +20,7 @@ class EmployeeController extends Controller
             'from_date' => 'required|date|after_or_equal:today',
             'to_date' => 'required|date|after_or_equal:from_date',
             'reason' => 'nullable|string|max:1000',
-        ],[
+        ], [
             'from_date.after_or_equal' => 'The start date must be today or a future date.',
             'to_date.after_or_equal' => 'The end date must be on or after the start date.',
         ]);
@@ -35,13 +35,14 @@ class EmployeeController extends Controller
 
         return redirect()->route('dashboard')->with('success', 'Leave request submitted successfully.');
     }
+
     public function history()
     {
         /** @var \App\Models\User $user */
         $user = Auth::user();
         // Select all old leave requests for the authenticated user
         $leaveRequests = $user->leaveRequests()->latest()->get();
+
         return view('employee.leave-request.history', compact('leaveRequests'));
     }
-
 }

@@ -43,7 +43,7 @@ Make sure you have the following installed on your system:
 
     ```bash
     git clone https://github.com/haneenaboshakra/LeaveManagementSystem.git
-    cd leave-management-system
+    cd LeaveManagementSystem
     ```
 
 2. **Install Dependencies**

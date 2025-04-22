@@ -17,15 +17,16 @@ return Application::configure(basePath: dirname(__DIR__))
             'permission' => \Spatie\Permission\Middleware\PermissionMiddleware::class,
             'role_or_permission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
         ]);
-        // 
-        $middleware->redirectUsersTo(function(Request $request) {
+        //
+        $middleware->redirectUsersTo(function (Request $request) {
             if ($request->user()->isAdmin()) {
                 return '/admin/dashboard';
             }
-        
+
             if ($request->user()->isManager()) {
                 return '/manager/dashboard';
             }
+
             return '/dashboard'; // For employees or default users
         });
     })

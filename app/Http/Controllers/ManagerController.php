@@ -20,29 +20,35 @@ class ManagerController extends Controller
 
         return view('manager.employees.index', compact('employees'));
     }
-    public function leaveRequests() {
+
+    public function leaveRequests()
+    {
         // Get employees assigned to the current manager
         $employees = User::where('role', 'employee')
             ->where('manager_id', Auth::user()->id)
             ->get();
-    
+
         // Get the leave requests only for these employees and with 'Pending' status
         $leaveRequests = LeaveRequest::where('status', LeaveRequestStatus::Pending)
             ->whereIn('user_id', $employees->pluck('id')) // Only get leave requests from these employees
             ->get();
-    
+
         // Pass the leave requests to the view
         return view('manager.employees.leaveRequests', compact('leaveRequests'));
     }
-    
-    public function updateStatus(Request $request, $id) {
+
+    public function updateStatus(Request $request, $id)
+    {
         $leaveRequest = LeaveRequest::find($id);
         $leaveRequest->status = $request->input('status');
         $leaveRequest->reviewed_by = Auth::id();
         $leaveRequest->save();
+
         return redirect()->back()->with('success', 'User status updated successfully.');
     }
-    public function leaveRequestsHistory() {
+
+    public function leaveRequestsHistory()
+    {
         // Get employees assigned to the current manager
         $employees = User::where('role', 'employee')
             ->where('manager_id', Auth::user()->id)

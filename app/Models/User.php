@@ -13,7 +13,9 @@ class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
+
     use HasRoles, SoftDeletes;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -50,28 +52,36 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-    public function isAdmin() {
+
+    public function isAdmin()
+    {
         return $this->hasRole('admin');
     }
-    public function isManager() {
+
+    public function isManager()
+    {
         return $this->hasRole('manager');
     }
+
     // An employee may have a manager (self-referencing)
     public function manager()
     {
         return $this->belongsTo(User::class, 'manager_id');
     }
+
     // A user can have many leave requests
     public function leaveRequests()
     {
         return $this->hasMany(LeaveRequest::class);
     }
+
     // manager/admin can review many leave requests
     public function reviewedLeaveRequests()
     {
         return $this->hasMany(LeaveRequest::class, 'reviewed_by');
     }
-     // A user belongs to a department
+
+    // A user belongs to a department
     public function department()
     {
         return $this->belongsTo(Department::class, 'department_id');
